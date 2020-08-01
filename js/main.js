@@ -79,11 +79,6 @@ function renderResult(El){
 
     let currentValue = document.getElementById(El).className;
     
-    if (boxesChecked === 45) {
-        messageEl.innerHTML = `It's a Tie!`;
-        playerWon = true;
-    }
-    
     if (sq0.className === currentValue && sq1.className === currentValue && sq2.className === currentValue){
         displayWin(currentValue);
     }
@@ -122,10 +117,15 @@ function renderResult(El){
         }
     }
 
+    if (boxesChecked === 45 && !playerWon) {
+        messageEl.innerHTML = `It's a Tie!`;
+        playerWon = true;
+    }
+
 }
 
 function displayWin(value) {
-    messageEl.innerHTML = `${value}'s Win!`;
+    messageEl.innerHTML = `${value.toUpperCase()}'s Win!`;
     confetti.start(1500);
     playerWon = true;
 }

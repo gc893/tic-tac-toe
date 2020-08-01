@@ -19,12 +19,21 @@ div {
     vertical-align: middle;
 }
 
-h1, h3 {
+h1 {
+    margin: 150px auto 10px;
     text-align: center;
+    font-family: 'Lobster', cursive;
+}
+
+h3 {
+    margin: 10px auto 30px;
+    text-align: center;
+    font-family: 'Abel', sans-serif;
 }
 
 button {
     margin: 30px auto;
+    font-family: 'Abel', sans-serif;
 }
 
 .x {
