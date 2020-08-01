@@ -126,6 +126,7 @@ function renderResult(El){
 
 function displayWin(value) {
     messageEl.innerHTML = `${value}'s Win!`;
+    confetti.start(1500);
     playerWon = true;
 }
 
