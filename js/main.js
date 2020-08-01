@@ -3,6 +3,7 @@
     let turnCounter = 0;
     let boxesArray = [];
     let playerWon = false;
+    boxesChecked = 0;
 
 // Cached Element References
 
@@ -23,8 +24,13 @@
 // Event Listeners
 
     boardEl.addEventListener('click', function() {
+        if (playerWon === true){
+            return;
+        }
+        
         toggleBox(event.target.id);
         renderResult(event.target.id);
+        console.log(boxesChecked);
     });
 
     resetButton.addEventListener('click', function(){
@@ -38,6 +44,7 @@ function init() {
     turnCounter = 0;
     boxesArray = [];
     playerWon = false;
+    boxesChecked = 0;
     messageEl.innerHTML = 'X starts. Press any box to begin!';
     
     for (let i=0; i< boxesEl.length; i++){
@@ -47,13 +54,13 @@ function init() {
         boxesEl[i].className = '';
     }
 
-     console.log(boxesEl);
+     console.log(boxesArray);
 };
 
 
 function toggleBox(El){
 
-    if(document.getElementById(El).className || playerWon === true){
+    if(document.getElementById(El).className){
         return;
     }
 
@@ -70,50 +77,56 @@ function toggleBox(El){
 
 function renderResult(El){
 
-    if (playerWon === true){
-        return;
-    }
-
     let currentValue = document.getElementById(El).className;
-    if (sq0.className === currentValue && sq1.className === currentValue && sq2.className === currentValue){
-        console.log('You win!');
+    
+    if (boxesChecked === 45) {
+        messageEl.innerHTML = `It's a Tie!`;
         playerWon = true;
+    }
+    
+    if (sq0.className === currentValue && sq1.className === currentValue && sq2.className === currentValue){
+        displayWin(currentValue);
     }
 
     if (sq3.className === currentValue && sq4.className === currentValue && sq5.className === currentValue){
-        console.log('You win!');
-        playerWon = true;
+        displayWin(currentValue);
     }
 
     if (sq6.className === currentValue && sq7.className === currentValue && sq8.className === currentValue){
-        console.log('You win!');
-        playerWon = true;
+        displayWin(currentValue);
     }
 
     if (sq0.className === currentValue && sq3.className === currentValue && sq6.className === currentValue){
-        console.log('You win!');
-        playerWon = true;
+        displayWin(currentValue);
     }
 
     if (sq1.className === currentValue && sq4.className === currentValue && sq7.className === currentValue){
-        console.log('You win!');
-        playerWon = true;
+        displayWin(currentValue);
     }
 
     if (sq2.className === currentValue && sq5.className === currentValue && sq8.className === currentValue){
-        console.log('You win!');
-        playerWon = true;
+        displayWin(currentValue);
     }
 
     if (sq0.className === currentValue && sq4.className === currentValue && sq8.className === currentValue){
-        console.log('You win!');
-        playerWon = true;
+        displayWin(currentValue);
     }
 
     if (sq2.className === currentValue && sq4.className === currentValue && sq6.className === currentValue){
-        console.log('You win!');
-        playerWon = true;
+        displayWin(currentValue);
     }
+
+    for (let i=0; i< boxesArray.length; i++){
+        if (boxesArray[i].className){
+            boxesChecked++;
+        }
+    }
+
+}
+
+function displayWin(value) {
+    messageEl.innerHTML = `${value}'s Win!`;
+    playerWon = true;
 }
 
 init();
