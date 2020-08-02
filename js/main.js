@@ -71,8 +71,8 @@ function resetGame() {
 
 function init() {
 
-    let xWins = 0;
-    let oWins = 0;
+    xWins = 0;
+    oWins = 0;
     totalResults.innerHTML = (`${xWins} ...... ${oWins}`);
     resetGame();
 
