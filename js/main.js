@@ -3,6 +3,8 @@
     let turnCounter = 0;
     let boxesArray = [];
     let playerWon = false;
+    let xWins = 0;
+    let oWins = 0;
     boxesChecked = 0;
 
 // Cached Element References
@@ -11,6 +13,8 @@
     let boardEl = document.querySelector('section');
     let resetButton = document.querySelector('button');
     let boxesEl = boardEl.childNodes;
+    let totalResults = document.getElementById('totalResults');
+    let initButton = document.getElementById('newMatch');
     let sq0 = document.getElementById('sq0');
     let sq1 = document.getElementById('sq1');
     let sq2 = document.getElementById('sq2');
@@ -27,6 +31,10 @@
         if (playerWon === true){
             return;
         }
+
+        if(event.target.className) {
+            return;
+        }
         
         toggleBox(event.target.id);
         renderResult(event.target.id);
@@ -34,12 +42,16 @@
     });
 
     resetButton.addEventListener('click', function(){
+        resetGame();
+    });
+
+    initButton.addEventListener('click', function(){
         init();
     });
 
 // Functions
 
-function init() {
+function resetGame() {
     
     turnCounter = 0;
     boxesArray = [];
@@ -57,12 +69,17 @@ function init() {
      console.log(boxesArray);
 };
 
+function init() {
+
+    let xWins = 0;
+    let oWins = 0;
+    totalResults.innerHTML = (`${xWins} ...... ${oWins}`);
+    resetGame();
+
+}
+
 
 function toggleBox(El){
-
-    if(document.getElementById(El).className){
-        return;
-    }
 
     if(turnCounter%2 === 0){
         document.getElementById(El).className = 'x';
@@ -127,6 +144,15 @@ function renderResult(El){
 function displayWin(value) {
     messageEl.innerHTML = `${value.toUpperCase()}'s Win!`;
     confetti.start(1500);
+
+    if (value === 'x') {
+        xWins++;
+    } else {
+        oWins++;
+    }
+
+    totalResults.innerHTML = (`${xWins} ...... ${oWins}`);
+
     playerWon = true;
 }
 
