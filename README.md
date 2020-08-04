@@ -1,5 +1,7 @@
 # Tic-Tac-Toe Game
 
+## [Play Now!](https://tictactoe-gc893.netlify.app)
+
 This project consists of creating a 3x3 board whose cells can take the values of _**X**_ or _**O**_.
 
 - The cells change their value when the user clicks on them (they can only click each cell once).
